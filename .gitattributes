@@ -1,0 +1,4 @@
+*.java ident
+*.bat ident
+*.sh ident
+
