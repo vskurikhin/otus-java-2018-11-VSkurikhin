@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="answer" class="ru.otus.models.Answer" scope="prototype"/>
+    <bean id="question" class="ru.otus.models.Question" scope="prototype"/>
+    <bean id="setOfQuestions" class="ru.otus.models.SetOfQuestions"/>
+
+    <bean id="reader" class="ru.otus.services.CSVReader">
+        <constructor-arg value="quests.csv"/>
+        <property name="setOfQuestions" ref="setOfQuestions"/>
+    </bean>
+
+    <bean id="exam" class="ru.otus.services.ConsoleExam">
+        <property name="setOfQuestions" ref="setOfQuestions"/>
+    </bean>
+
+</beans>

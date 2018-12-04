@@ -1,4 +1,4 @@
-# otus-java-2018-09-VSkurikhin
+# otus-java-2018-11-VSkurikhin
 # Для курса "Разработчик на Spring Framework" в Otus.ru
 
 Группа 2018-11
