@@ -7,33 +7,32 @@ import org.junit.Test;
 import ru.otus.exeptions.ExceptionIO;
 import ru.otus.models.*;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.function.Supplier;
-
-import static org.junit.Assert.*;
 
 public class CSVReaderTest
 {
-    CSVReader reader;
+    private CSVReader reader;
+    private Questions questions;
 
     @Before
     public void setUp() throws Exception
     {
-        reader = new CSVReader("quests.csv");
+        questions = new Questions();
+        reader = new CSVReader(questions, "quests.csv");
     }
 
     @After
     public void tearDown() throws Exception
     {
         reader = null;
+        questions = null;
     }
 
     @Test
     public void testSetOfQuestions() {
-        SetOfQuestions expected = new SetOfQuestions();
-        reader.setSetOfQuestions(new SetOfQuestions());
-        Assert.assertEquals(expected, reader.getSetOfQuestions());
+        Questions expected = new Questions();
+        reader.setQuestions(new Questions());
+        Assert.assertEquals(expected, reader.getQuestions());
     }
 
     @Test(expected = NullPointerException.class)
@@ -47,7 +46,7 @@ public class CSVReaderTest
     {
         Supplier<IAnswer> getAnswer = () -> new Answer();
         Supplier<IQuestion> getQuestion = () -> new Question();
-        CSVReader test = new CSVReader();
+        CSVReader test = new CSVReader(questions, "");
         test.read(getQuestion, getAnswer);
     }
 }

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SetOfQuestions implements ISetOfQuestions, Iterable<IQuestion>
+public class Questions implements IQuestions
 {
     private List<IQuestion> questions = new LinkedList<>();
 
@@ -58,9 +58,9 @@ public class SetOfQuestions implements ISetOfQuestions, Iterable<IQuestion>
 
     private class IteratorQuestion implements Iterator<IQuestion>
     {
-        private SetOfQuestions setOfQuestions;
+        private Questions setOfQuestions;
 
-        public IteratorQuestion(SetOfQuestions setOfQuestions)
+        public IteratorQuestion(Questions setOfQuestions)
         {
             this.setOfQuestions = setOfQuestions;
         }
@@ -92,10 +92,10 @@ public class SetOfQuestions implements ISetOfQuestions, Iterable<IQuestion>
         if (obj == null) {
             return false;
         }
-        if ( ! (obj instanceof SetOfQuestions)) {
+        if ( ! (obj instanceof Questions)) {
             return false;
         }
-        SetOfQuestions other = (SetOfQuestions) obj;
+        Questions other = (Questions) obj;
 
         return questions.equals(other.questions) && activeQuestion == other.activeQuestion && score == other.score;
     }

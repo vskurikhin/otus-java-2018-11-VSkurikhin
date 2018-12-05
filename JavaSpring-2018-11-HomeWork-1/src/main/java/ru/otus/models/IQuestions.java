@@ -2,7 +2,7 @@ package ru.otus.models;
 
 import java.util.Iterator;
 
-public interface ISetOfQuestions
+public interface IQuestions extends Iterable<IQuestion>
 {
     void addQuestion(IQuestion question);
 

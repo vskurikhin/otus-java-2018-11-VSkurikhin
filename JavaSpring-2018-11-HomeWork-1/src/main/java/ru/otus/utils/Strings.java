@@ -13,7 +13,7 @@ public class Strings
         return in;
     }
 
-    public static ArrayList<String> split(String s)
+    public static String[] split(String s)
     {
         ArrayList<String> words = new ArrayList<>();
 
@@ -31,6 +31,6 @@ public class Strings
 
         words.add(unQuote(s.substring(start)));
 
-        return words;
+        return words.toArray(new String[0]);
     }
 }
