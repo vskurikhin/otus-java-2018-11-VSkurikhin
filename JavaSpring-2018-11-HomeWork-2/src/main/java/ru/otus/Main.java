@@ -1,6 +1,5 @@
 package ru.otus;
 
-import com.sun.istack.internal.NotNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,9 @@ public class Main
     }
 
     @Autowired
-    public Main(@NotNull @Qualifier("msg") MessagesService msg,
-                @NotNull @Qualifier("reader") QuestionsReader questionsReader,
-                @NotNull @Qualifier("tester") QuizExecutor quizExecutor,
+    public Main(@Qualifier("msg") MessagesService msg,
+                @Qualifier("reader") QuestionsReader questionsReader,
+                @Qualifier("tester") QuizExecutor quizExecutor,
                 AnswerFactory answerFactory, QuestionFactory questionFactory
     ){
         this.msg = msg;
