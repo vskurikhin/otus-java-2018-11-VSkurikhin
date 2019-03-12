@@ -1,0 +1,10 @@
+logging:
+  level:
+    ROOT: INFO
+
+spring:
+  banner:
+    location: classpath:banner.txt
+
+locale: "ru_RU"
+fileNameTemplate: "quests_%s.csv"
