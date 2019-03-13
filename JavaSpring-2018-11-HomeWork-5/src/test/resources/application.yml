@@ -1,0 +1,9 @@
+logging:
+  level:
+    ROOT: ERROR
+
+spring:
+  banner:
+    location: classpath:banner.txt
+
+locale: en_US
