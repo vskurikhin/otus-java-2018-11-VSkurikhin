@@ -1,0 +1,15 @@
+logging:
+  level:
+    ROOT: INFO
+
+spring:
+  banner:
+    location: classpath:banner.txt
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      db: booksdb
+
+locale: "ru_RU"

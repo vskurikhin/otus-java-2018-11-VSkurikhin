@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      database: books
+
+locale: en_US
