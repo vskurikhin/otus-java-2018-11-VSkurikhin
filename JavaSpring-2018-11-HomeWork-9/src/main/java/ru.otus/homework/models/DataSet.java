@@ -2,7 +2,7 @@ package ru.otus.homework.models;
 
 public interface DataSet
 {
-    String getId();
+    long getId();
 
-    void setId(String id);
+    void setId(long id);
 }

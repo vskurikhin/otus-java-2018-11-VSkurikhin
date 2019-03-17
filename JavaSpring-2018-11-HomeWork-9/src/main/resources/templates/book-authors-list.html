@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+</head>
+<body class="body">
+    <h2 th:text="'Список авторов для книги ' + ${bookId}">Список авторов для книги 0</h2>
+
+    <table class="tg0">
+        <thead>
+        <tr>
+            <td>Имя</td>
+            <td>Фамилия</td>
+            <td></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="author : ${authors}">
+            <td th:text="${author.firstName}">firstName</td>
+            <td th:text="${author.lastName}">lastName</td>
+            <td>
+                <a th:href="@{/author-edit(authorId=${author.id},bookId=${bookId})}" href="author-edit.html">Edit</a>
+            </td>
+            <td>
+                <form th:action="@{/author-delete}" method="post" action="author-delete" class="inline">
+                    <input hidden type="hidden" name="authorId" value="0" th:value="${author.id}"/>
+                    <input hidden type="hidden" name="bookId" value="0" th:value="${bookId}"/>
+                    <button type="submit" name="submit_param" value="submit_value" class="link-button">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <form id="button-form" th:action="@{/author-create}" method="get" action="author-create.html">
+                    <div class="dtb0">
+                        <div class="dtb0Body">
+                            <div class="dtb0Row">
+                                <div class="dtb0Cell">
+                                    <button type="reset" onclick="history.back()">Go Back</button>
+                                </div>
+                                <div class="dtb0Cell">
+                                    <input hidden type="hidden" name="bookId" value="0" th:value="${bookId}"/>
+                                    <button type="submit" >Create new</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+

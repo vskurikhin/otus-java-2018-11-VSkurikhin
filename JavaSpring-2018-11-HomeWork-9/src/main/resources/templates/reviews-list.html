@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+</head>
+<body class="body">
+    <h2 th:text="'Рецензии на книгу ' + ${bookId}">Рецензии на книгу 0</h2>
+
+    <table class="tg0">
+        <thead>
+        <tr>
+            <td>Рецензии</td>
+            <td></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="review : ${reviews}">
+            <td th:text="${review.review}">title</td>
+            <td>
+                <a th:href="@{/review-edit(reviewId=${review.id},bookId=${bookId})}" href="review-edit.html">Edit</a>
+            </td>
+            <td>
+                <form th:action="@{/review-delete}" method="post" action="review-delete" class="inline">
+                    <input hidden type="hidden" name="reviewId" value="0" th:value="${review.id}"/>
+                    <input hidden type="hidden" name="bookId" value="0" th:value="${bookId}"/>
+                    <button type="submit" name="submit_param" value="submit_value" class="link-button">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <form id="button-form" th:action="@{/review-create}" method="get" action="review-create.html">
+                    <div class="dtb0">
+                        <div class="dtb0Body">
+                            <div class="dtb0Row">
+                                <div class="dtb0Cell">
+                                    <button type="reset" onclick="history.back()">Go Back</button>
+                                </div>
+                                <div class="dtb0Cell">
+                                    <input hidden type="hidden" name="bookId" value="0" th:value="${bookId}"/>
+                                    <button type="submit" >Create new</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

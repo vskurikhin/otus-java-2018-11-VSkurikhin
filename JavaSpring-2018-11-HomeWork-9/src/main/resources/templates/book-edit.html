@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+</head>
+<body class="body">
+    <h2 th:text="'Книга ' + ${book.id}">Книга 0</h2>
+
+    <form id="edit-form" th:action="@{/book-edit(bookId=${book.id})}" th:method="post" action="book-edit.html">
+        <table class="tg0">
+            <thead>
+            <tr>
+                <td class="tg0-cr">
+                    ISBN:
+                </td>
+                <td class="tg0-cl">
+                    <input id="isbn" type="text" class="input500" th:field="*{book.isbn}"/>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="title">Название книги:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input id="title" type="text" class="input500" th:field="*{book.title}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="editionNumber">Издание:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input id="editionNumber" type="text" class="input500" th:field="*{book.editionNumber}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="copyright">Год издания:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input id="copyright" type="text" class="input500" th:field="*{book.copyright}"/>
+                </td>
+            </tr>
+            <tr th:if="${book.id} != 0">
+                <td class="tg0-cr">Автор(ы):</td>
+                <td class="tg0-cl">
+                    <div class="dtb0">
+                        <div class="dtb0Body">
+                            <div class="dtb0Row">
+                                <div class="dtb0Cell">
+                                    <ul>
+                                        <li th:each="author : ${book.getAuthors()}" th:text="${author}"></li>
+                                    </ul>
+                                </div>
+                                <div class="dtb0Cell">
+                                    <a th:href="@{/book-authors-list(bookId=${book.id})}" href="book-authors-list.html">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="genre">Жанр:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input id="genre" type="text" class="input500" th:field="*{book.genre}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <div class="row">
+                        <button type="reset" onclick="history.back()">Go Back</button>
+                    </div>
+                </td>
+                <td class="tg0-cl">
+                    <div class="row">
+                        <button type="submit">Save</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <input hidden type="hidden" id="id" th:field="*{book.id}"/>
+        </div>
+    </form>
+</body>
+</html>

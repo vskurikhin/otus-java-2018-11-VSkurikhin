@@ -19,7 +19,7 @@
             <AppenderRef ref="File_ru.otus"/>
         </Logger>
 
-        <Root level="DEBUG">
+        <Root level="INFO">
             <AppenderRef ref="File_root"/>
         </Root>
     </Loggers>
