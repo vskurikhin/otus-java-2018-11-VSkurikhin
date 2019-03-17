@@ -4,24 +4,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Document(collection = "authors")
+@Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"first_name", "last_name"}))
 public class Author implements Serializable, DataSet
 {
     static final long serialVersionUID = -1L;
 
     @Id
-    private String id;
+    @Column(name = "author_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
 }

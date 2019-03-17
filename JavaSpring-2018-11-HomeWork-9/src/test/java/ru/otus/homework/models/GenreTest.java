@@ -31,20 +31,20 @@ class GenreTest
         }
 
         @Test
-        @DisplayName("default values in Publisher()")
+        @DisplayName("default values in Genre()")
         void defaults()
         {
-            assertThat(genre).hasFieldOrPropertyWithValue("id", null);
-            assertThat(genre).hasFieldOrPropertyWithValue("genre", null);
+            assertThat(genre).hasFieldOrPropertyWithValue("id", 0L);
+            assertThat(genre).hasFieldOrPropertyWithValue("value", null);
         }
 
         @Test
         @DisplayName("Setter and getter for publisherName")
         void testGetSetFirstName()
         {
-            genre.setGenre(TEST);
-            assertThat(genre).hasFieldOrPropertyWithValue("genre", TEST);
-            assertEquals(TEST, genre.getGenre());
+            genre.setValue(TEST);
+            assertThat(genre).hasFieldOrPropertyWithValue("value", TEST);
+            assertEquals(TEST, genre.getValue());
         }
     }
 
@@ -64,7 +64,7 @@ class GenreTest
         void defaults()
         {
             assertThat(genre).hasFieldOrPropertyWithValue("id", TEST_ID);
-            assertThat(genre).hasFieldOrPropertyWithValue("genre", TEST_GENRE_NAME);
+            assertThat(genre).hasFieldOrPropertyWithValue("value", TEST_GENRE_NAME);
         }
 
         @Test

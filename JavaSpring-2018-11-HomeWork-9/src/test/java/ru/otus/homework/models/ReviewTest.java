@@ -34,7 +34,7 @@ class ReviewTest
         @DisplayName("default values in Publisher()")
         void defaults()
         {
-            assertThat(review).hasFieldOrPropertyWithValue("id", null);
+            assertThat(review).hasFieldOrPropertyWithValue("id", 0L);
             assertThat(review).hasFieldOrPropertyWithValue("review", null);
         }
 

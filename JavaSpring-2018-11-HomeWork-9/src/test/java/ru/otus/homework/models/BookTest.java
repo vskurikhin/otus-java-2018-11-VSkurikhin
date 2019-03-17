@@ -38,13 +38,13 @@ class BookTest
         @DisplayName("default values in Book()")
         void defaults()
         {
-            assertThat(book).hasFieldOrPropertyWithValue("id", null);
+            assertThat(book).hasFieldOrPropertyWithValue("id", 0L);
             assertThat(book).hasFieldOrPropertyWithValue("isbn", null);
             assertThat(book).hasFieldOrPropertyWithValue("title", null);
             assertThat(book).hasFieldOrPropertyWithValue("editionNumber", 0);
             assertThat(book).hasFieldOrPropertyWithValue("copyright", null);
             assertThat(book).hasFieldOrPropertyWithValue("authors", Collections.emptyList());
-            assertThat(book).hasFieldOrPropertyWithValue("genres", Collections.emptyList());
+            assertThat(book).hasFieldOrPropertyWithValue("genre", null);
         }
 
         @Test
@@ -82,6 +82,15 @@ class BookTest
             assertThat(book).hasFieldOrPropertyWithValue("copyright", TEST);
             assertEquals(TEST, book.getCopyright());
         }
+
+        @Test
+        @DisplayName("Setter and getter for publisher")
+        void testGetSetGenre()
+        {
+            book.setGenre(genre);
+            assertThat(book).hasFieldOrPropertyWithValue("genre", genre);
+            assertEquals(genre, book.getGenre());
+        }
     }
 
     @Nested
@@ -91,7 +100,9 @@ class BookTest
         @BeforeEach
         void createNew()
         {
-            book = new Book(TEST_ID, TEST_ISBN, TEST_TITLE, TEST_NUM, TEST_COPYRIGHT, null, null);
+            book = new Book(
+                TEST_ID, TEST_ISBN, TEST_TITLE, TEST_NUM, TEST_COPYRIGHT, Collections.emptyList(), genre
+            );
         }
 
         @Test
@@ -103,8 +114,8 @@ class BookTest
             assertThat(book).hasFieldOrPropertyWithValue("title", TEST_TITLE);
             assertThat(book).hasFieldOrPropertyWithValue("editionNumber", TEST_NUM);
             assertThat(book).hasFieldOrPropertyWithValue("copyright", TEST_COPYRIGHT);
-            assertThat(book).hasFieldOrPropertyWithValue("authors", null);
-            assertThat(book).hasFieldOrPropertyWithValue("genres", null);
+            assertThat(book).hasFieldOrPropertyWithValue("authors", Collections.emptyList());
+            assertThat(book).hasFieldOrPropertyWithValue("genre", genre);
         }
 
         @Test
@@ -112,7 +123,9 @@ class BookTest
         void testEquals()
         {
             assertNotEquals(new Book(), book);
-            Book expected = new Book(TEST_ID, TEST_ISBN, TEST_TITLE, TEST_NUM, TEST_COPYRIGHT, null, null);
+            Book expected = new Book(
+                TEST_ID, TEST_ISBN, TEST_TITLE, TEST_NUM, TEST_COPYRIGHT, Collections.emptyList(), genre
+            );
             assertEquals(expected.hashCode(), book.hashCode());
             assertEquals(expected, book);
         }

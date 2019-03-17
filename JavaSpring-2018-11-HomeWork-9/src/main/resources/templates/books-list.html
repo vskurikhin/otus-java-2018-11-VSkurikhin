@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+</head>
+<body class="body">
+    <h2>Каталог</h2>
+
+    <table class="tg0">
+        <thead>
+        <tr>
+            <td>ISBN</td>
+            <td>Название книги</td>
+            <td>Издание</td>
+            <td>Год издания</td>
+            <td>Автор(ы)</td>
+            <td>Жанр</td>
+            <td>Рецензии</td>
+            <td></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td class="tg0-cl" th:text="${book.isbn}">isbn</td>
+            <td th:text="${book.title}">title</td>
+            <td th:text="${book.editionNumber}">editionNumber</td>
+            <td th:text="${book.copyright}">copyright</td>
+            <td class="tg0-cl">
+                <ul class="w3-margin-right">
+                    <li th:each="author : ${book.getAuthors()}" th:text="${author}"></li>
+                </ul>
+            </td>
+            <td th:text="${book.genre}">genre</td>
+            <td>
+                <a th:href="@{/reviews-list(bookId=${book.id})}" href="reviews-list.html">Reviews</a>
+            </td>
+            <td>
+                <a th:href="@{/book-edit(bookId=${book.id})}" href="book-edit.html">Edit</a>
+            </td>
+            <td>
+                <form th:action="@{/book-delete}" method="post" action="book-delete" class="inline">
+                    <input hidden type="hidden" name="bookId" value="0" th:value="${book.id}"/>
+                    <button type="submit" name="submit_param" value="submit_value" class="link-button">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="9">
+                <form id="button-form" th:action="@{/book-create}" method="get" action="book-create.html">
+                    <button type="submit" >Create new</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

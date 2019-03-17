@@ -34,7 +34,7 @@ class AuthorTest
         @DisplayName("default values in Author()")
         void defaults()
         {
-            assertThat(author).hasFieldOrPropertyWithValue("id", null);
+            assertThat(author).hasFieldOrPropertyWithValue("id", 0L);
             assertThat(author).hasFieldOrPropertyWithValue("firstName", null);
             assertThat(author).hasFieldOrPropertyWithValue("lastName", null);
         }

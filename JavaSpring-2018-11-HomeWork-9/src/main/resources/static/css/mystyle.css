@@ -1,0 +1,106 @@
+/*
+ * mystyle.css
+ * This file was last modified at 2019-02-18 20:44 by Victor N. Skurikhin.
+ * $Id$
+ * This is free and unencumbered software released into the public domain.
+ * For more information, please refer to <http://unlicense.org>
+ */
+
+.body {
+    margin: 0 auto;
+    min-width: 1024px;
+    width: 90%
+}
+
+.tg0 {
+    border-collapse: collapse;
+    border-spacing: 0;
+    min-width: 640px
+}
+.tg0 th {
+    border: black 1px dotted;
+    margin: 2px;
+    padding: 2px;
+    width: 90%;
+    word-break: normal
+}
+.tg0 td {
+    border: black 1px dotted;
+    horiz-align: center;
+    margin: 2px;
+    padding: 2px;
+    text-align: center;
+    vertical-align: center
+}
+.tg0 .tg0-tl {
+    horiz-align: left;
+    margin: 2px;
+    padding: 2px;
+    text-align: left;
+    vertical-align: top
+}
+.tg0 .tg0-cl {
+    horiz-align: left;
+    margin: 2px;
+    padding: 2px;
+    text-align: left;
+    vertical-align: center
+}
+.tg0 .tg0-cr {
+    horiz-align: right;
+    margin: 2px;
+    padding: 2px;
+    text-align: right;
+    vertical-align: center
+}
+
+.input500 {
+    min-width: 500px
+}
+
+.textarea500 {
+    height: 250px;
+    min-width: 500px;
+    min-height: 250px;
+    width: 100%
+}
+
+.dtb0{
+    display: table;
+    width: 100%
+}
+.dtb0Row {
+    display: table-row
+}
+.dtb0Cell, .dtb0Head {
+    border: 0;
+    display: table-cell;
+    padding: 3px 10px
+}
+.dtb0Cell-vc {
+    border: 0;
+    display: table-cell;
+    padding: 3px 10px;
+    vertical-align: middle
+}
+.dtb0Body {
+    display: table-row-group
+}
+
+.inline {
+    display: inline;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.link-button:focus {
+    outline: none;
+}
+.link-button:active {
+    color:red;
+}
+

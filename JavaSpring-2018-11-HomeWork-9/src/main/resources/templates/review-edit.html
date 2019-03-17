@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+</head>
+<body class="body">
+    <h2 th:text="'Рецензия ' + ${review.id} + ' для Книги ' + ${bookId}">Рецензия 0 для Книги 0</h2>
+
+    <form id="edit-form" th:action="@{/review-edit(reviewId=${review.id},bookId=${bookId})}" th:method="post" action="review-edit.html">
+        <table class="tg0">
+            <tbody>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="review">Рецензия:</label>
+                </td>
+                <td class="tg0-cl">
+                    <textarea form="edit-form" id="review" name="review" class="textarea500" title=""
+                              th:field="*{review.review}"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <div class="row">
+                        <button type="reset" onclick="history.back()">Go Back</button>
+                    </div>
+                </td>
+                <td class="tg0-cl">
+                    <div class="row">
+                        <input hidden type="hidden" name="id" value="0" th:value="*{review.id}"/>
+                        <button type="submit">Save</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>
