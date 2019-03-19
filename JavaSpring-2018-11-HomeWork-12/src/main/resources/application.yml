@@ -1,0 +1,32 @@
+logging:
+  level:
+    ROOT: DEBUG
+
+spring:
+  banner:
+    location: classpath:banner.txt
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    initialization-mode: ALWAYS
+    url: "jdbc:h2:mem:db;DB_CLOSE_DELAY=-1"
+    username: sa
+    password: sa
+
+  h2:
+    console:
+      enabled: true
+      path: "/h2-console"
+
+  jpa:
+    generate-ddl: true
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      hbm2ddl:
+        auto: create
+
+application:
+  rememberKey: "RememberMeApplicationKey"
+  locale: "ru_RU"
+  strength: 12
