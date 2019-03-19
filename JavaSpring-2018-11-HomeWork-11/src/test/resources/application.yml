@@ -1,0 +1,21 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: "/h2-console"
+  datasource:
+    driver-class-name: org.h2.Driver
+    initialization-mode: ALWAYS
+    url: "mem:db;DB_CLOSE_DELAY=-1"
+    username: sa
+    password: sa
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+
+application:
+  locale: "ru_RU"
