@@ -34,6 +34,7 @@ public class ApplicationConfig
         // no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase db = builder
+            .setName("db")
             .ignoreFailedDrops(true)
             .continueOnError(true)
             .setType(EmbeddedDatabaseType.H2)

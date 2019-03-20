@@ -1,6 +1,7 @@
 package ru.otus.homework.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.homework.dao.AuthorDao;
@@ -99,6 +100,7 @@ public class DataJpaService implements DatabaseService
     }
 
     @Override
+    @PostAuthorize(value = "@booksArchiveSecurityFilter.filterBooks(authentication, returnObject)")
     public List<Book> getAllBooks()
     {
         return bookDao.findAll();

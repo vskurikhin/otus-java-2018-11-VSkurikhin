@@ -40,7 +40,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
+        /*
         http.csrf().disable()
+            .headers().frameOptions().disable()
+            .and()
+            .authorizeRequests().antMatchers("/**").permitAll();
+        */
+        http.csrf().disable()
+            .headers().frameOptions().disable()
+            .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests().antMatchers("/css/*", "/img/*", "/h2-console/**").permitAll()
@@ -56,6 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             .passwordParameter(PARAMETER_PASSWORD)
             .defaultSuccessUrl("/", true)
             .failureUrl(URL_FAILURE)
+            .and()
+            .logout()
+            .logoutUrl("/logout")
             .and()
             .rememberMe()
             .key(yap.getRememberKey())
