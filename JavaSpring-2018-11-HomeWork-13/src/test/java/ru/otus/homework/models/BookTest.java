@@ -42,7 +42,7 @@ class BookTest
             assertThat(book).hasFieldOrPropertyWithValue("isbn", null);
             assertThat(book).hasFieldOrPropertyWithValue("title", null);
             assertThat(book).hasFieldOrPropertyWithValue("editionNumber", 0);
-            assertThat(book).hasFieldOrPropertyWithValue("copyright", null);
+            assertThat(book).hasFieldOrPropertyWithValue("year", 0);
             assertThat(book).hasFieldOrPropertyWithValue("authors", Collections.emptyList());
             assertThat(book).hasFieldOrPropertyWithValue("genre", null);
         }
@@ -76,11 +76,11 @@ class BookTest
 
         @Test
         @DisplayName("Setter and getter for copyright")
-        void testGetSetCopyright()
+        void testGetSetYear()
         {
-            book.setCopyright(TEST);
-            assertThat(book).hasFieldOrPropertyWithValue("copyright", TEST);
-            assertEquals(TEST, book.getCopyright());
+            book.setYear(TEST_NUM);
+            assertThat(book).hasFieldOrPropertyWithValue("year", TEST_NUM);
+            assertEquals(TEST_NUM, book.getYear());
         }
 
         @Test
@@ -101,7 +101,7 @@ class BookTest
         void createNew()
         {
             book = new Book(
-                TEST_ID, TEST_ISBN, TEST_TITLE, TEST_NUM, TEST_COPYRIGHT, Collections.emptyList(), genre
+                TEST_ID, TEST_ISBN, TEST_TITLE, TEST_NUM, TEST_COPYRIGHT, TEST_NUM, Collections.emptyList(), genre
             );
         }
 
@@ -124,7 +124,7 @@ class BookTest
         {
             assertNotEquals(new Book(), book);
             Book expected = new Book(
-                TEST_ID, TEST_ISBN, TEST_TITLE, TEST_NUM, TEST_COPYRIGHT, Collections.emptyList(), genre
+                TEST_ID, TEST_ISBN, TEST_TITLE, TEST_NUM, TEST_COPYRIGHT, TEST_NUM, Collections.emptyList(), genre
             );
             assertEquals(expected.hashCode(), book.hashCode());
             assertEquals(expected, book);

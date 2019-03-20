@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS book (
   title             VARCHAR(90) NOT NULL,
   edition_number    INT,
   copyright         VARCHAR(40) NOT NULL,
+  year              INT,
   genre_id          BIGINT REFERENCES genre (genre_id),
   UNIQUE (isbn),
   PRIMARY KEY (book_id)

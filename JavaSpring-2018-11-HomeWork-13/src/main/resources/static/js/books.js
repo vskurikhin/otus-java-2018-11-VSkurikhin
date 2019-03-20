@@ -78,19 +78,11 @@ function appendBooksTableHeader(body) {
     );
 }
 
-function opportunityOfDeleteBook(btnDeleteBookId, bookId) {
+function opportunityOfDeleteBook(btnDeleteBookId, book) {
     console.log('opportunityOfDeleteBook');
-    $.ajax({
-        type: 'GET',
-        url: reviewsURL + '/count/by-book/' + bookId,
-        dataType: "json",
-        success: function (data) {
-            console.log('opportunityOfDeleteBook inline function data: ' + data.count);
-            if (data.count > 0) {
-                $('#' + btnDeleteBookId).hide()
-            }
-        }
-    })
+    if (Number(book.reviewsCount) > 0) {
+        $('#' + btnDeleteBookId).hide()
+    }
 }
 
 function addBookRow(body, book) {
@@ -101,7 +93,7 @@ function addBookRow(body, book) {
         + '  <td class="tg0-cl">' + book.isbn + '</td>'
         + '  <td>' + book.title + '</td>'
         + '  <td>' + book.editionNumber + '</td>'
-        + '  <td>' + book.copyright + '</td>'
+        + '  <td>' + book.year + '</td>'
         + '  <td class="tg0-cl">'
         + '    <ul id="authors-list-' + book.id + '" class="w3-margin-right">'
         + '    </ul>'
@@ -122,7 +114,7 @@ function addBookRow(body, book) {
         + '  </td>'
         + '</tr>'
     );
-    opportunityOfDeleteBook(btnDeleteBookId, book.id);
+    opportunityOfDeleteBook(btnDeleteBookId, book);
     findAuthorsForBook(book.id)
 }
 

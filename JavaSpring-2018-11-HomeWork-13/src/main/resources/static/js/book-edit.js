@@ -4,7 +4,8 @@ function bookFormToJSON() {
     var bookIsbn = $('#bookIsbn').val();
     var bookTitle = $('#bookTitle').val();
     var bookEditionNumber = $('#bookEditionNumber').val();
-    var bookCopyright = $('#bookCopyright').val();
+    var bookCopyright = 'Temporary for remove copyright';
+    var bookYear = $('#bookYear').val();
     var bookGenre = $('#bookGenre').val();
 
     return JSON.stringify({
@@ -13,6 +14,7 @@ function bookFormToJSON() {
         "title": bookTitle,
         "editionNumber": bookEditionNumber,
         "copyright": bookCopyright,
+        "year": bookYear,
         "authors": null,
         "genre": bookGenre
     })

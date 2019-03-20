@@ -26,9 +26,13 @@ public class BookDto
 
     private String copyright;
 
+    private String year;
+
     private List<String> authors;
 
     private String genre;
+
+    private Integer reviewsCount = 0;
 
     public BookDto(Book book)
     {
@@ -39,6 +43,7 @@ public class BookDto
         title = book.getTitle();
         editionNumber = Integer.toString(book.getEditionNumber());
         copyright = book.getCopyright();
+        year = Integer.toString(book.getYear());
 
         if (! Objects.isNull(book.getAuthors())) {
             authors = book.getAuthors()
@@ -58,6 +63,7 @@ public class BookDto
         book.setTitle(title);
         book.setEditionNumber(Integer.parseInt(editionNumber));
         book.setCopyright(copyright);
+        book.setYear(Integer.parseInt(year));
 
         if ( ! Objects.isNull(authors)) {
             book.setAuthors(authors.stream().map(s -> {

@@ -26,12 +26,20 @@ public class BooksRestController
         this.databaseService = databaseService;
     }
 
+    private Integer countReviews(BookDto dto)
+    {
+        Long count = databaseService.countReviewsByBookId(dto.getId());
+
+        return count > Integer.MAX_VALUE ? Integer.MAX_VALUE : count.intValue();
+    }
+
     @GetMapping(REST_API + REST_V1_BOOKS)
     public List<BookDto> getBooks()
     {
         return databaseService.getAllBooks()
             .stream()
             .map(BookDto::new)
+            .peek(bookDto -> bookDto.setReviewsCount(countReviews(bookDto)))
             .collect(Collectors.toList());
     }
 

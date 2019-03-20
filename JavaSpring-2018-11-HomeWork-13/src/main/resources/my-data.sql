@@ -3,16 +3,16 @@ SELECT 1, 'Information Technology'
   FROM dual
  WHERE NOT exists(SELECT * FROM genre WHERE genre_id = 1);
 
-INSERT INTO book (book_id, isbn, title, edition_number, copyright, genre_id)
-SELECT 1, '0130895601', 'Advanced Java 2 Platform How to Program', 1, '2002', 1
+INSERT INTO book (book_id, isbn, title, edition_number, copyright, year, genre_id)
+SELECT 1, '0130895601', 'Advanced Java 2 Platform How to Program', 1, '2002', 1999, 1
   FROM dual
  WHERE NOT exists(SELECT * FROM book WHERE isbn = '0130895601');
-INSERT INTO book (book_id, isbn, title, edition_number, copyright, genre_id)
-SELECT 2, '0130829293', 'XML How to Program', 1, '2001', 1
+INSERT INTO book (book_id, isbn, title, edition_number, copyright, year, genre_id)
+SELECT 2, '0130829293', 'XML How to Program', 1, '2001', 1999, 1
   FROM dual
  WHERE NOT exists(SELECT * FROM book WHERE isbn = '0130829293');
-INSERT INTO book (book_id, isbn, title, edition_number, copyright, genre_id)
-SELECT 3, '0130895520', 'The Complete Perl Training Course', 1, '2001', 1
+INSERT INTO book (book_id, isbn, title, edition_number, copyright, year, genre_id)
+SELECT 3, '0130895520', 'The Complete Perl Training Course', 1, '2001', 2001, 1
   FROM dual
  WHERE NOT exists(SELECT * FROM book WHERE isbn = '0130895520');
 

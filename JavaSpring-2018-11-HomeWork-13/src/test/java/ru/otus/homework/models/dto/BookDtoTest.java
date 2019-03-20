@@ -38,8 +38,10 @@ class BookDtoTest
             assertThat(bookDto).hasFieldOrPropertyWithValue("isbn", null);
             assertThat(bookDto).hasFieldOrPropertyWithValue("title", null);
             assertThat(bookDto).hasFieldOrPropertyWithValue("editionNumber", null);
+            assertThat(bookDto).hasFieldOrPropertyWithValue("year", null);
             assertThat(bookDto).hasFieldOrPropertyWithValue("authors", null);
             assertThat(bookDto).hasFieldOrPropertyWithValue("genre", null);
+            assertThat(bookDto).hasFieldOrPropertyWithValue("reviewsCount", 0);
         }
 
         @Test
@@ -79,6 +81,24 @@ class BookDtoTest
         }
 
         @Test
+        @DisplayName("Setter and getter for year")
+        void testGetSetYear()
+        {
+            bookDto.setYear(TEST);
+            assertThat(bookDto).hasFieldOrPropertyWithValue("year", TEST);
+            assertEquals(TEST, bookDto.getYear());
+        }
+
+        @Test
+        @DisplayName("Setter and getter for year")
+        void testGetSetReviewsCount()
+        {
+            bookDto.setReviewsCount(TEST_NUM);
+            assertThat(bookDto).hasFieldOrPropertyWithValue("reviewsCount", TEST_NUM);
+            assertEquals(TEST_NUM, bookDto.getReviewsCount().intValue());
+        }
+
+        @Test
         @DisplayName("Setter and getter for authors")
         void testGetSetAuthors()
         {
@@ -103,7 +123,7 @@ class BookDtoTest
         @BeforeEach
         void createNew()
         {
-            bookDto = new BookDto(TEST_LID, TEST, TEST, TEST, TEST, null, TEST);
+            bookDto = new BookDto(TEST_LID, TEST, TEST, TEST, TEST, TEST, null, TEST, TEST_NUM);
         }
 
         @Test
@@ -116,6 +136,7 @@ class BookDtoTest
             assertThat(bookDto).hasFieldOrPropertyWithValue("editionNumber", TEST);
             assertThat(bookDto).hasFieldOrPropertyWithValue("authors", null);
             assertThat(bookDto).hasFieldOrPropertyWithValue("genre", TEST);
+            assertThat(bookDto).hasFieldOrPropertyWithValue("reviewsCount", TEST_NUM);
         }
 
         @Test
@@ -123,7 +144,7 @@ class BookDtoTest
         void testEquals()
         {
             assertNotEquals(new BookDto(), bookDto);
-            BookDto expected = new BookDto(TEST_LID, TEST, TEST, TEST, TEST, null, TEST);
+            BookDto expected = new BookDto(TEST_LID, TEST, TEST, TEST, TEST, TEST, null, TEST, TEST_NUM);
             assertEquals(expected.hashCode(), bookDto.hashCode());
             assertEquals(expected, bookDto);
         }
