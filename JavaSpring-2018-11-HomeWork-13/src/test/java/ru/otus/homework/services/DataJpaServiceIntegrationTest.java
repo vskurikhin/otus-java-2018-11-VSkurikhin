@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.otus.homework.Main;
 import ru.otus.homework.models.Author;
@@ -21,6 +22,7 @@ import static ru.otus.outside.utils.TestData.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Main.class)
+@WithMockUser(username = "user", authorities = "ROLE_USERS")
 @DisplayName("Integration tests for data layer with class DataJpaService")
 class DataJpaServiceIntegrationTest
 {
@@ -32,6 +34,7 @@ class DataJpaServiceIntegrationTest
     class AuthorsMethods
     {
         @Test
+        @WithMockUser(username = "user", authorities = "ROLE_USERS")
         @DisplayName("persists when save then update, however disappears when delete")
         void testCreateUpdateDelete() throws Exception
         {
@@ -69,6 +72,7 @@ class DataJpaServiceIntegrationTest
         }
 
         @Test
+        @WithMockUser(username = "user", authorities = "ROLE_USERS")
         @DisplayName("test author unique constraint by first_name and last_name")
         void testUniqueConstraint()
         {
@@ -89,6 +93,7 @@ class DataJpaServiceIntegrationTest
     class GenresMethods
     {
         @Test
+        @WithMockUser(username = "user", authorities = "ROLE_USERS")
         @DisplayName("persists when save then update, however disappears when delete")
         void testCreateUpdateDelete() throws Exception
         {
@@ -125,6 +130,7 @@ class DataJpaServiceIntegrationTest
         }
 
         @Test
+        @WithMockUser(username = "user", authorities = "ROLE_USERS")
         @DisplayName("test genre unique constraint by first_name and last_name")
         void testUniqueConstraint()
         {
@@ -145,6 +151,7 @@ class DataJpaServiceIntegrationTest
     class BooksMethods
     {
         @Test
+        @WithMockUser(username = "user", authorities = "ROLE_USERS")
         @DisplayName("persists when save then update, however disappears when delete")
         void testCreateUpdateDelete() throws Exception
         {
@@ -198,161 +205,18 @@ class DataJpaServiceIntegrationTest
             List<Book> finishList = databaseService.getAllBooks();
             assertEquals(expectedBooksState, finishList);
         }
+    }
 
+    @Nested
+    @DisplayName("Security ACL tests")
+    class ACLTest
+    {
         @Test
-        @DisplayName("save book with authors")
-        void testCreateDeleteWithAuthors() throws Exception
+        @WithMockUser(username = "user", authorities = "ROLE_USERS")
+        public void getAllBooks() throws Exception
         {
-            List<Author> expectedAuthorsState = databaseService.getAllAuthors();
-            List<Book> expectedBooksState = databaseService.getAllBooks();
-            List<Genre> expectedGenresState = databaseService.getAllGenres();
-
-            // Create
-            Genre expectedGenre = createGenre0();
-            Author author0 = createAuthor0();
-            Author author1 = createAuthor1();
-            author1.setId(0L);
-            Book expectedBook = createBook0(expectedGenre, author0, author1);
-            databaseService.saveBook(expectedBook);
-
-            List<Book> testList = databaseService.getAllBooks();
-            assertFalse(testList.isEmpty());
-            assertTrue(testList.size() > expectedBooksState.size());
-
-            Book createdBookTest = databaseService.getBookById(expectedBook.getId()).orElse(null);
-            assertNotNull(createdBookTest);
-            assertEquals(expectedBook, createdBookTest);
-
-            // Update
-            expectedBook.setIsbn(expectedBook.getIsbn() + "_test");
-            expectedBook.setTitle(expectedBook.getTitle() + "_test");
-            expectedBook.setEditionNumber(expectedBook.getEditionNumber() + 1);
-            expectedBook.setCopyright(expectedBook.getCopyright() + "_test");
-            databaseService.saveBook(expectedBook);
-            Book updatedTest = databaseService.getBookById(expectedBook.getId()).orElse(null);
-            assertNotNull(updatedTest);
-            assertEquals(expectedBook, updatedTest);
-
-            List<Book> bookList = databaseService.getAllBooksByAuthorId(author0.getId());
-            assertTrue(bookList.contains(expectedBook));
-            long count = databaseService.countBooksByAuthorId(author0.getId());
-            assertTrue(count > 0);
-
-            // Delete
-            List<Author> authors = updatedTest.getAuthors();
-            databaseService.removeBook(createdBookTest.getId());
-            authors.forEach(author -> databaseService.removeAuthor(author.getId()));
-            databaseService.removeGenre(expectedGenre.getId());
-
-            // check State
-            List<Genre> finishGenresList = databaseService.getAllGenres();
-            assertEquals(expectedGenresState, finishGenresList);
-            List<Book> finishList = databaseService.getAllBooks();
-            assertEquals(expectedBooksState, finishList);
-            List<Author> finishAuthorsList = databaseService.getAllAuthors();
-            assertEquals(expectedAuthorsState, finishAuthorsList);
-        }
-
-        @Test
-        @DisplayName("save book")
-        void testSave() throws Exception
-        {
-            List<Book> expectedBooksState = databaseService.getAllBooks();
-            List<Genre> expectedGenresState = databaseService.getAllGenres();
-
-            // Create
-            Genre genre0 = createGenre0();
-
-            Book book0 = createBook0(genre0);
-            databaseService.saveBook(book0);
-            List<Book> booksList1 = databaseService.getAllBooks();
-
-            // Genre genre1 = createGenre1();
-            Genre savedGenre = databaseService.getGenreByValue(genre0.getValue()).get();
-            savedGenre.setValue(savedGenre.getValue() + "_test");
-            book0.setGenre(savedGenre);
-
-            databaseService.saveBook(book0);
-            Book updatedTest = databaseService.getBookById(book0.getId()).orElse(null);
-            assertNotNull(updatedTest);
-            book0.getGenre().setId(updatedTest.getGenre().getId());
-            assertEquals(book0, updatedTest);
-
-            // Delete
-            databaseService.removeBook(book0.getId());
-            List<Genre> list1 = databaseService.getAllGenres();
-            List<Book> list2 = databaseService.getAllBooks();
-            databaseService.removeGenre(savedGenre.getId());
-
-            // check State
-            List<Genre> finishGenresList = databaseService.getAllGenres();
-            assertEquals(expectedGenresState, finishGenresList);
-            List<Book> finishList = databaseService.getAllBooks();
-            assertEquals(expectedBooksState, finishList);
-        }
-
-        @Test
-        @DisplayName("save book with reviews")
-        void testCreateDeleteWithReviews() throws Exception
-        {
-            List<Review> expectedReviewsState = databaseService.getAllReviews();
-            List<Book> expectedBooksState = databaseService.getAllBooks();
-            List<Genre> expectedGenresState = databaseService.getAllGenres();
-
-            // Create
-            Genre expectedGenre = createGenre0();
-
-            Book expectedBook = createBook0(expectedGenre);
-            databaseService.saveBook(expectedBook);
-            List<Book> testBooksList = databaseService.getAllBooks();
-            assertFalse(testBooksList.isEmpty());
-            assertTrue(testBooksList.size() > expectedBooksState.size());
-            Book createdBookTest = databaseService.getBookById(expectedBook.getId()).orElse(null);
-            assertNotNull(createdBookTest);
-            assertEquals(expectedBook, createdBookTest);
-
-            Review review0 = createReview0(expectedBook);
-            databaseService.saveReview(review0);
-            Review review1 = createReview0(expectedBook);
-            databaseService.saveReview(review1);
-
-            List<Review> testReviewsList = databaseService.getAllReviews();
-            assertFalse(testReviewsList.isEmpty());
-            assertTrue(testReviewsList.size() > expectedReviewsState.size());
-
-            Review createdReview0 = databaseService.getReviewById(review0.getId()).orElse(null);
-            assertNotNull(createdReview0);
-            assertEquals(review0.getBook(), createdReview0.getBook());
-            Review createdReview1 = databaseService.getReviewById(review1.getId()).orElse(null);
-            assertNotNull(createdReview1);
-            assertEquals(review1, createdReview1);
-
-            // Update
-            review0.setReview(review0.getReview() + "_test");
-            databaseService.saveReview(review0);
-            Review updatedReview0 = databaseService.getReviewById(review0.getId()).orElse(null);
-            assertNotNull(updatedReview0);
-            assertEquals(review0, updatedReview0);
-
-            // find by book id
-            List<Review> testList = databaseService.getAllReviewsForBookById(createdBookTest.getId());
-            assertEquals(2, testList.size());
-            assertTrue(testList.contains(updatedReview0));
-            assertTrue(testList.contains(createdReview1));
-
-            // Delete
-            databaseService.removeReview(updatedReview0.getId());
-            databaseService.removeReview(createdReview1.getId());
-            databaseService.removeBook(createdBookTest.getId());
-            databaseService.removeGenre(expectedGenre.getId());
-
-            // check State
-            List<Genre> finishGenresList = databaseService.getAllGenres();
-            assertEquals(expectedGenresState, finishGenresList);
-            List<Book> finishList = databaseService.getAllBooks();
-            assertEquals(expectedBooksState, finishList);
-            List<Review> finishReviewsList = databaseService.getAllReviews();
-            assertEquals(expectedReviewsState, finishReviewsList);
+            List<Book> books = databaseService.getAllBooks();
+            assertEquals(0, books.size());
         }
     }
 }
