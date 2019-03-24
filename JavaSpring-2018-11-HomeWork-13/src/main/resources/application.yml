@@ -1,0 +1,21 @@
+logging:
+  level:
+    ROOT: DEBUG
+
+spring:
+  banner:
+    location: classpath:banner.txt
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+application:
+  rememberKey: "RememberMeApplicationKey"
+  locale: "ru_RU"
+  strength: 4
