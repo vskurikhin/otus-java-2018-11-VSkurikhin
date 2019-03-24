@@ -13,4 +13,6 @@ public interface ReviewDao extends MongoRepository<Review, BigInteger>
     Optional<Long> countByBook(@Param("book") Book book);
 
     Optional<Review> findAllByBook(@Param("book") Book book);
+
+    void deleteByBookId(BigInteger bookId);
 }
