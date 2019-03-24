@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.otus.homework.models.DataSet;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +23,7 @@ public class Review implements Serializable, DataSet
     @Id
     @Column(name = "review_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private BigInteger id;
 
     @Column
     private String review;

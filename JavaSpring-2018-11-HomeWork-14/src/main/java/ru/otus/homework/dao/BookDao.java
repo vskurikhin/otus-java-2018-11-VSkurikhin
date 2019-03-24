@@ -1,16 +1,14 @@
 package ru.otus.homework.dao;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import ru.otus.homework.models.Author;
-import ru.otus.homework.models.Book;
+import ru.otus.homework.models.mongo.Book;
 
 import java.math.BigInteger;
+import java.util.Optional;
 
-public interface BookDao extends ReactiveMongoRepository<Book, BigInteger>
+public interface BookDao extends MongoRepository<Book, BigInteger>
 {
     @Query(value = "{'authors' :{'$ref' : 'author' , '$id' : ?0}}", count = true)
-    Mono<Long> countByAuthorId(BigInteger id);
+    Optional<Long> countByAuthorId(BigInteger id);
 }

@@ -1,12 +1,12 @@
 package ru.otus.homework.dao;
 
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
-import reactor.core.publisher.Mono;
-import ru.otus.homework.models.Genre;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import ru.otus.homework.models.mongo.Genre;
 
 import java.math.BigInteger;
+import java.util.Optional;
 
-public interface GenreDao extends ReactiveMongoRepository<Genre, BigInteger>
+public interface GenreDao extends MongoRepository<Genre, BigInteger>
 {
-    Mono<Genre> findByValue(String value);
+    Optional<Genre> findByValue(String value);
 }
