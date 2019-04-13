@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var booksURL = /*[[${books}]]*/ 'books';
+    </script>
+</head>
+<body class="body">
+    <h2 th:text="'Книга ' + ${book.id}">Книга 0</h2>
+
+    <form id="book-edit-form">
+        <table class="tg0">
+            <thead>
+            <tr>
+                <td class="tg0-cr">
+                    ISBN:
+                </td>
+                <td class="tg0-cl">
+                    <input id="bookIsbn" type="text" class="input500" form="book-edit-form"
+                           th:field="*{book.isbn}"/>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="bookTitle">Название книги:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input id="bookTitle" type="text" class="input500" form="book-edit-form"
+                           th:field="*{book.title}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="bookEditionNumber">Издание:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input id="bookEditionNumber" type="text" class="input500" form="book-edit-form"
+                           th:field="*{book.editionNumber}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="bookYear">Год издания:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input id="bookYear" type="text" class="input500" form="book-edit-form"
+                           th:field="*{book.year}"/>
+                </td>
+            </tr>
+            <tr th:if="${book.id} != 0">
+                <td class="tg0-cr">Автор(ы):</td>
+                <td class="tg0-cl">
+                    <div class="dtb0">
+                        <div class="dtb0Body">
+                            <div class="dtb0Row">
+                                <div class="dtb0Cell">
+                                    <ul>
+                                        <li th:each="author : ${book.getAuthors()}" th:text="${author}"></li>
+                                    </ul>
+                                </div>
+                                <div class="dtb0Cell">
+                                    <a th:href="@{/book-authors-list(bookId=${book.id})}" href="/book-authors-list">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="bookGenre">Жанр:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input id="bookGenre" type="text" class="input500"
+                           th:field="*{book.genre}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <div class="row">
+                        <button id="btnBack" type="reset" form="book-edit-form" onclick="location.href = '/';">Home</button>
+                    </div>
+                </td>
+                <td class="tg0-cl">
+                    <div class="row">
+                        <button id="btnSave" form="book-edit-form">Save</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <input id="bookId" value="0" form="book-edit-form" hidden type="hidden"
+                   th:field="*{book.id}"/>
+        </div>
+    </form>
+
+    <script type="text/javascript" language="javascript" src="js/book-edit.js"></script>
+</body>
+</html>

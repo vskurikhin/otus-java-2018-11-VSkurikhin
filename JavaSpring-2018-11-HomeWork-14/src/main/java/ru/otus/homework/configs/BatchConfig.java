@@ -61,18 +61,18 @@ public class BatchConfig
             .name("bookItemReader")
             .entityManagerFactory(entityManagerFactory)
             .pageSize(10)
-            .queryString("SELECT b FROM book b")
+            .queryString("SELECT b FROM Book b")
             .build();
     }
 
     @Bean(destroyMethod = "")
-    public JpaPagingItemReader<Review> bookCommentItemReader(EntityManagerFactory entityManagerFactory)
+    public JpaPagingItemReader<Review> reviewItemReader(EntityManagerFactory entityManagerFactory)
     {
         return new JpaPagingItemReaderBuilder<Review>()
-            .name("bookCommentItemReader")
+            .name("reviewItemReader")
             .entityManagerFactory(entityManagerFactory)
             .pageSize(10)
-            .queryString("SELECT r FROM review r")
+            .queryString("SELECT r FROM Review r")
             .build();
     }
 
@@ -93,7 +93,7 @@ public class BatchConfig
     {
         return new RepositoryItemWriterBuilder<ru.otus.homework.models.mongo.Book>()
             .repository(bookDao)
-            .methodName("saveWithAuthorsGenre")
+            .methodName("saveWithGenreAndAuthors")
             .build();
     }
 
@@ -102,7 +102,7 @@ public class BatchConfig
     {
         return new RepositoryItemWriterBuilder<ru.otus.homework.models.mongo.Review>()
             .repository(reviewDao)
-            .methodName("saveWithBook")
+            .methodName("save")
             .build();
     }
 

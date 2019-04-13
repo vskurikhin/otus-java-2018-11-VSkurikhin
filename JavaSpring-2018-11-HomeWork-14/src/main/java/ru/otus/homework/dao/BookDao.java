@@ -7,7 +7,7 @@ import ru.otus.homework.models.mongo.Book;
 import java.math.BigInteger;
 import java.util.Optional;
 
-public interface BookDao extends MongoRepository<Book, BigInteger>
+public interface BookDao extends MongoRepository<Book, BigInteger>, BookExtendDao
 {
     @Query(value = "{'authors' :{'$ref' : 'author' , '$id' : ?0}}", count = true)
     Optional<Long> countByAuthorId(BigInteger id);

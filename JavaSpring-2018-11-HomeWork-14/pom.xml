@@ -6,7 +6,7 @@
 
     <groupId>ru.otus</groupId>
     <artifactId>homework14</artifactId>
-    <version>14.0-3</version>
+    <version>14.0-4</version>
 
     <name>JavaSpring-11-2018 HomeWork-14 Maven</name>
     <url>https://otus.ru</url>
@@ -54,6 +54,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter</artifactId>
+            <version>2.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
