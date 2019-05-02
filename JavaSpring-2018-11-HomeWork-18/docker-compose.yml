@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  postgresql:
+    build:
+      context: .
+      dockerfile: ./docker-postgresql/Dockerfile
+    ports:
+      - 5432:5432
+  eureka-server:
+    build:
+      context: ./eureka-server
+      dockerfile: ./Dockerfile
+    ports:
+      - 8761:8761
+  eureka-client:
+    build:
+      context: ./eureka-client
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresql
+      - eureka-server

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var authorsURL = /*[[${authors}]]*/ 'authors';
+    </script>
+</head>
+<body class="body">
+    <h2 th:text="'Автор ' + ${author.id}">Автор 0</h2>
+
+    <form id="author-edit-form">
+        <table class="tg0">
+            <tbody>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="firstName">Имя:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input form="author-edit-form" id="firstName" type="text" class="input500"
+                           th:field="*{author.firstName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="lastName">Фамилия:</label>
+                </td>
+                <td class="tg0-cl">
+                    <input form="author-edit-form" id="lastName" type="text" class="input500"
+                           th:field="*{author.lastName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <div class="row">
+                        <button id="btnBack" type="reset" form="author-edit-form" onclick="location.href = '/';">Home</button>
+                    </div>
+                </td>
+                <td class="tg0-cl">
+                    <div class="row">
+                        <button id="btnSave" form="author-edit-form">Save</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <div>
+                <input id="bookId" name="bookId" value="0" form="author-edit-form" type="hidden"
+                       th:value="${bookId}" th:attr="name='bookId'" />
+                <input id="authorId" name="authorId" value="0" form="author-edit-form" type="hidden"
+                       th:field="*{author.id}" th:attr="name='authorId'" />
+            </div>
+        </table>
+    </form>
+
+    <script type="text/javascript" language="javascript" src="js/book-author-edit.js"></script>
+</body>
+</html>
