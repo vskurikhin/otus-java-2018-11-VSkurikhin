@@ -1,19 +1,49 @@
 version: '3'
 
 services:
+
   postgresql:
     build:
       context: .
       dockerfile: ./docker-postgresql/Dockerfile
     ports:
       - 5432:5432
+
   eureka-server:
+    image: "eureka-server:18.0-SNAPSHOT"
     build:
       context: ./eureka-server
       dockerfile: ./Dockerfile
     ports:
       - 8761:8761
+
+  hystrix-turbine:
+    image: "hystrix-turbine:18.0-SNAPSHOT"
+    build:
+      context: ./hystrix-turbine
+      dockerfile: ./Dockerfile
+    ports:
+    - 8989:8989
+    depends_on:
+    - eureka-server
+
+  hystrix-monitor:
+    image: "hystrix-monitor:18.0-SNAPSHOT"
+    links:
+      - hystrix-turbine
+    build:
+      context: ./hystrix-turbine
+      dockerfile: ./Dockerfile
+    ports:
+    - 8989:8989
+    depends_on:
+    - eureka-server
+    - hystrix-turbine
+
   eureka-client:
+    image: "eureka-client:18.0-SNAPSHOT"
+    links:
+      - eureka-server
     build:
       context: ./eureka-client
       dockerfile: ./Dockerfile
@@ -22,3 +52,4 @@ services:
     depends_on:
       - postgresql
       - eureka-server
+      - hystrix-monitor

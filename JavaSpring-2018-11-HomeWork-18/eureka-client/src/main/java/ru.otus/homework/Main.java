@@ -6,12 +6,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import ru.otus.homework.configs.YamlApplicationProperties;
 
 @SpringBootApplication
 @EnableCircuitBreaker
-@EnableHystrixDashboard
+@EnableHystrix
 @EnableDiscoveryClient
 @EnableConfigurationProperties(YamlApplicationProperties.class)
 public class Main

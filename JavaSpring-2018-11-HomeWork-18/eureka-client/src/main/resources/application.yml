@@ -22,11 +22,6 @@ spring:
       hbm2ddl:
         auto: create
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: hystrix.stream
 
 eureka:
   client:
@@ -36,6 +31,27 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 3
+
+
+turbine:
+  aggregator:
+    clusterConfig: BOOK-SERVICE
+  appConfig: BOOK-SERVICE
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+
+sampleservice:
+  ribbon:
+    DeploymentContextBasedVipAddresses: book-service
+    ReadTimeout: 10000
+    MaxAutoRetries: 2
+
 
 application:
   rememberKey: "RememberMeApplicationKey"
