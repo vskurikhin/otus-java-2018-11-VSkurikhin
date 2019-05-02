@@ -1,0 +1,19 @@
+logging:
+  level:
+    ROOT: INFO
+
+spring:
+  banner:
+    location: classpath:banner.txt
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+application:
+  locale: "ru_RU"
