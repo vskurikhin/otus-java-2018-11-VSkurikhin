@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    volumes:
+    - ~/.m2/repository:/m2repo
 
   eureka-server:
     image: "eureka-server:18.0-SNAPSHOT"
