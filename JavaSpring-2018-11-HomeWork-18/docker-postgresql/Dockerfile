@@ -1,5 +1,4 @@
 FROM postgres:11.2
-MAINTAINER Victor Skurikhin
 
 ENV POSTGRES_USER dbuser
 ENV POSTGRES_PASSWORD password

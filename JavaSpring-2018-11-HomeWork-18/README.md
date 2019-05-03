@@ -7,4 +7,4 @@
 ### HomeWork-18
  * [x] Обернуть внешние вызовы в Hystrix
  * [x] Обернуть все внешние вызовы в Hystrix, Hystrix Javanica.
- * [ ] Поднять Turbine Dashboard для мониторинга.
+ * [x] Поднять Turbine Dashboard для мониторинга.
