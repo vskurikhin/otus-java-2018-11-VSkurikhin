@@ -29,7 +29,7 @@ services:
     image: "hystrix-monitor:18.0-SNAPSHOT"
     build:
       context: .
-      dockerfile: ./hystrix-turbine/Dockerfile
+      dockerfile: ./hystrix-monitor/Dockerfile
     ports:
     - 9090:9090
     depends_on:
