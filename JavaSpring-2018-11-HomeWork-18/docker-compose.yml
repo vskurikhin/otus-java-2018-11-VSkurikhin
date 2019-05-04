@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  build-image:
+    image: "homework18:18.0-SNAPSHOT"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+    - ~/.m2/repository:/m2repo
+
+  eureka-server:
+    image: "eureka-server:18.0-SNAPSHOT"
+    build:
+      context: .
+      dockerfile: ./eureka-server/Dockerfile
+    ports:
+      - 8761:8761
+
+  hystrix-turbine:
+    image: "hystrix-turbine:18.0-SNAPSHOT"
+    build:
+      context: .
+      dockerfile: ./hystrix-turbine/Dockerfile
+    ports:
+    - 8989:8989
+    depends_on:
+    - eureka-server
+
+  hystrix-monitor:
+    image: "hystrix-monitor:18.0-SNAPSHOT"
+    build:
+      context: .
+      dockerfile: ./hystrix-monitor/Dockerfile
+    ports:
+    - 9090:9090
+    depends_on:
+    - eureka-server
+    - hystrix-turbine
+
+  postgresql:
+    build:
+      context: .
+      dockerfile: ./docker-postgresql/Dockerfile
+    ports:
+      - 5432:5432
+
+  eureka-client:
+    image: "eureka-client:18.0-SNAPSHOT"
+    build:
+      context: .
+      dockerfile: ./eureka-client-service/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresql
+      - eureka-server
+      - hystrix-monitor
+

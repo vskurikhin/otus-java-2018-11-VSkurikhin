@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: hystrix-turbine
+  cloud:
+    config:
+      discovery:
+        enabled: false
+
+server:
+  port: 8989
+
+
+turbine:
+  aggregator:
+    clusterConfig: BOOK-SERVICE
+  appConfig: BOOK-SERVICE
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
