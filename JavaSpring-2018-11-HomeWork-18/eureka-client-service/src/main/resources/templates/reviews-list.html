@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var bookId = /*[[${bookId}]]*/ 0;
+        var reviewsURL = /*[[${reviews}]]*/ 'reviews';
+    </script>
+</head>
+<body class="body">
+    <h2 th:text="'Рецензии на книгу ' + ${bookId}">Рецензии на книгу 0</h2>
+
+    <div id="reviews-table-div"></div>
+
+    <script type="text/javascript" language="javascript" src="js/reviews.js"></script>
+</body>
+</html>
