@@ -1,0 +1,26 @@
+logging:
+  level:
+    ROOT: INFO
+
+spring:
+  banner:
+    location: classpath:banner.txt
+
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://postgresql:5432/db
+    username: dbuser
+    password: password
+
+  jpa:
+    generate-ddl: true
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      hbm2ddl:
+        auto: create
+
+application:
+  rememberKey: "RememberMeApplicationKey"
+  locale: "ru_RU"
+  strength: 4

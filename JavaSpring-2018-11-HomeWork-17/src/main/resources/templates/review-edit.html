@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset=UTF-8>
+    <title id="head-title">JavaSpring-11-2018 welcome</title>
+    <link rel="stylesheet" href='css/mystyle.css'/>
+    <link rel="stylesheet" href='css/w3.css'/>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var reviewsURL = /*[[${reviews}]]*/ 'reviews';
+    </script>
+</head>
+<body class="body">
+    <h2 th:text="'Рецензия ' + ${review.id} + ' для Книги ' + ${bookId}">Рецензия 0 для Книги 0</h2>
+
+    <form id="review-edit-form">
+        <table class="tg0">
+            <tbody>
+            <tr>
+                <td class="tg0-cr">
+                    <label for="review">Рецензия:</label>
+                </td>
+                <td class="tg0-cl">
+                    <textarea form="review-edit-form" id="review" name="review" class="textarea500" title=""
+                              th:field="*{review.review}"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="tg0-cr">
+                    <div class="row">
+                        <button id="btnBack" type="reset" form="review-edit-form" onclick="location.href = '/';">Home</button>
+                    </div>
+                </td>
+                <td class="tg0-cl">
+                    <div class="row">
+                        <button id="btnSave" form="review-edit-form">Save</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <input id="bookId" name="bookId" value="0" form="review-edit-form" type="hidden"
+                   th:value="${bookId}" th:attr="name='bookId'" />
+            <input id="reviewId" name="reviewId" value="0" form="review-edit-form" type="hidden"
+                   th:field="*{review.id}" th:attr="name='reviewId'" />
+        </div>
+    </form>
+
+    <script type="text/javascript" language="javascript" src="js/review-edit.js"></script>
+</body>
+</html>
