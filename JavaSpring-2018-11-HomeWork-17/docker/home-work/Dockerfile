@@ -5,10 +5,10 @@ RUN mkdir -p $PROJECT_DIR
 WORKDIR $PROJECT_DIR
 
 ADD ./pom.xml $PROJECT_DIR
-RUN mvn dependency:resolve
+RUN mvn -B dependency:resolve
 
 ADD ./src/ $PROJECT_DIR/src
-RUN mvn install
+RUN mvn -B install
 
 FROM openjdk:8-jdk
 
